@@ -62,159 +62,171 @@ class _profilePageState extends State<profilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 40),
-              decoration: BoxDecoration(color: Colors.white),
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundColor: const Color.fromARGB(255, 245, 245, 245),
-                    child: ClipOval(
-                      child: Image.asset(
-                        profilePicturePath,
-                        width: 120,
-                        height: 120,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Icon(
-                            Icons.person,
-                            size: 60,
-                            color: Colors.grey.shade600,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Alvaro',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 50, 50, 50),
-                      fontFamily: "Popins",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Card(
-                shadowColor: Colors.black,
-                color: const Color.fromARGB(255, 245, 245, 245),
-                elevation: 2,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Personal Information',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: const Color.fromARGB(255, 50, 50, 50),
-                              fontFamily: "Popins",
-                            ),
-                          ),
-                          if (!_isEditing)
-                            IconButton(
-                              icon: Icon(Icons.edit, color: Colors.black),
-                              onPressed: _toggleEdit,
-                              tooltip: 'Edit',
-                            )
-                          else
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.check, color: Colors.green),
-                                  onPressed: _saveChanges,
-                                  tooltip: 'Save',
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.close, color: Colors.red),
-                                  onPressed: _cancelEdit,
-                                  tooltip: 'Cancel',
-                                ),
-                              ],
-                            ),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      _buildInfoRow(
-                        Icons.person_outline,
-                        'Username',
-                        _usernameController,
-                        _isEditing,
-                      ),
-                      Divider(height: 30),
-                      _buildInfoRow(
-                        Icons.email_outlined,
-                        'Email',
-                        _emailController,
-                        _isEditing,
-                      ),
-                      Divider(height: 30),
-                      _buildInfoRow(
-                        Icons.phone_outlined,
-                        'Phone Number',
-                        _phoneController,
-                        _isEditing,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Card(
-                shadowColor: Colors.black,
-                color: const Color.fromARGB(255, 245, 245, 245),
-                elevation: 2,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Preference Settings',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 50, 50, 50),
-                          fontFamily: "Popins",
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      _buildPreferenceRow(
-                        Icons.notifications_outlined,
-                        'Notifications',
-                        true,
-                      ),
-                      Divider(height: 30),
-                      _buildPreferenceRow(
-                        Icons.dark_mode_outlined,
-                        'Dark Mode',
-                        false,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            _profilePic(),
+            _personalInfo(),
+            _preferences(),
             SizedBox(height: 20),
           ],
         ),
       ),
     );
+  }
+
+  Padding _preferences() {
+    return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Card(
+              shadowColor: Colors.black,
+              color: const Color.fromARGB(255, 245, 245, 245),
+              elevation: 2,
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Preference Settings',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: const Color.fromARGB(255, 50, 50, 50),
+                        fontFamily: "Popins",
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    _buildPreferenceRow(
+                      Icons.notifications_outlined,
+                      'Notifications',
+                      true,
+                    ),
+                    Divider(height: 30),
+                    _buildPreferenceRow(
+                      Icons.dark_mode_outlined,
+                      'Dark Mode',
+                      false,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+  }
+
+  Padding _personalInfo() {
+    return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Card(
+              shadowColor: Colors.black,
+              color: const Color.fromARGB(255, 245, 245, 245),
+              elevation: 2,
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Personal Information',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 50, 50, 50),
+                            fontFamily: "Popins",
+                          ),
+                        ),
+                        if (!_isEditing)
+                          IconButton(
+                            icon: Icon(Icons.edit, color: Colors.black),
+                            onPressed: _toggleEdit,
+                            tooltip: 'Edit',
+                          )
+                        else
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.check, color: Colors.green),
+                                onPressed: _saveChanges,
+                                tooltip: 'Save',
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.close, color: Colors.red),
+                                onPressed: _cancelEdit,
+                                tooltip: 'Cancel',
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    _buildInfoRow(
+                      Icons.person_outline,
+                      'Username',
+                      _usernameController,
+                      _isEditing,
+                    ),
+                    Divider(height: 30),
+                    _buildInfoRow(
+                      Icons.email_outlined,
+                      'Email',
+                      _emailController,
+                      _isEditing,
+                    ),
+                    Divider(height: 30),
+                    _buildInfoRow(
+                      Icons.phone_outlined,
+                      'Phone Number',
+                      _phoneController,
+                      _isEditing,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+  }
+
+  Container _profilePic() {
+    return Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 40),
+            decoration: BoxDecoration(color: Colors.white),
+            child: Column(
+              children: [
+                CircleAvatar(
+                  radius: 60,
+                  backgroundColor: const Color.fromARGB(255, 245, 245, 245),
+                  child: ClipOval(
+                    child: Image.asset(
+                      profilePicturePath,
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Icon(
+                          Icons.person,
+                          size: 60,
+                          color: Colors.grey.shade600,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Alvaro',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(255, 50, 50, 50),
+                    fontFamily: "Popins",
+                  ),
+                ),
+              ],
+            ),
+          );
   }
 
   AppBar _appBarProfile(BuildContext context) {

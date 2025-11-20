@@ -35,86 +35,105 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: Drawer(
-        width: 200,
-        backgroundColor: Colors.white,
-        shadowColor: Colors.black,
-        child: Column(
-          children: [
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(width: 15),
-                IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios_new,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                SizedBox(width: 20),
-                Text(
-                  "Menu",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-
-            ListTile(
-              tileColor: const Color.fromARGB(255, 228, 228, 228),
-              iconColor: Colors.black,
-              textColor: Colors.black,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Icon(Icons.home_filled),
-              ),
-              title: Text(
-                "Home",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.black,
-              textColor: Colors.black,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Icon(Icons.favorite_border),
-              ),
-              title: Text("Wishlist"),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.black,
-              textColor: Colors.black,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Icon(Icons.history),
-              ),
-              title: Text("History"),
-              onTap: () {},
-            ),
-            ListTile(
-              iconColor: Colors.black,
-              textColor: Colors.black,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Icon(Icons.support_agent),
-              ),
-              title: Text("Support"),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer: _sideNavBar(context),
 
       appBar: appBar(),
       body: ListView(children: [_searchBar(), _newDrops(), _inventory()]),
+    );
+  }
+
+  Drawer _sideNavBar(BuildContext context) {
+    return Drawer(
+      width: 200,
+      backgroundColor: Colors.white,
+      shadowColor: Colors.black,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            children: [
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(width: 15),
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios_new,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  SizedBox(width: 20),
+                  Text(
+                    "Menu",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+
+              ListTile(
+                tileColor: const Color.fromARGB(255, 228, 228, 228),
+                iconColor: Colors.black,
+                textColor: Colors.black,
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Icon(Icons.home_filled),
+                ),
+                title: Text(
+                  "Home",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                onTap: () {},
+              ),
+              ListTile(
+                iconColor: Colors.black,
+                textColor: Colors.black,
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Icon(Icons.favorite_border),
+                ),
+                title: Text("Wishlist"),
+                onTap: () {},
+              ),
+              ListTile(
+                iconColor: Colors.black,
+                textColor: Colors.black,
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Icon(Icons.history),
+                ),
+                title: Text("History"),
+                onTap: () {},
+              ),
+              ListTile(
+                iconColor: Colors.black,
+                textColor: Colors.black,
+                leading: Padding(
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Icon(Icons.support_agent),
+                ),
+                title: Text("Support"),
+                onTap: () {},
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Text(
+              "Version Alpha 0.1",
+              style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
